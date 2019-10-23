@@ -1,4 +1,4 @@
-# vim-test-docker
+# DockerOnVim
 
 This repo is to create development environment to vim-airline on docker
 
