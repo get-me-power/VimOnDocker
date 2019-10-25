@@ -13,3 +13,5 @@ set t_Co=256
 set nobackup
 set noswapfile
 set sh=bash
+set backspace=indent,eol,start
+
