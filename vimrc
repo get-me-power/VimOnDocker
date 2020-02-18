@@ -45,11 +45,38 @@ if !has('nvim')
   set backspace=indent,eol,start
 endif
 
-nnoremap <ESC><ESC> :noh<CR>
+"スペースをトリガーにする
+let mapleader = "\<Space>"
 
-if exists(':FZF')
-  nnoremap <Space>f :FZF<CR>
+noremap <Leader>t :terminal<CR>
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>s :split<CR>
+nnoremap <Leader>f :FZF<CR>
+
+"ウインドウ移動ショートカットをswに当てる
+nnoremap sw <C-w>w
+
+if has('terminal')
+  tnoremap <silent><C-u> <C-\><C-N>
 endif
+
+"検索ハイライトの設定
+nnoremap <ESC><ESC> :nohlsearch<CR>
+
+" ----setting gina.vim
+packadd gina.vim
+if exists(':Gina')
+  nnoremap <Up> :Gina status<CR>
+  nnoremap <Down> :Gina commit<CR>
+  nnoremap <Left> :Gina diff<CR>
+  nnoremap <Right> :QuickRun<CR>
+endif
+noremap! <Up> <Nop>
+noremap! <Down> <Nop>
+noremap! <Left> <Nop>
+noremap! <Right> <Nop>
+
+
 
 if executable('ctags')
   set tags=./tags;
