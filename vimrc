@@ -13,6 +13,24 @@ call plug#end()
 set laststatus=2
 set ttimeoutlen=10
 
+let g:airline#extensions#tabline#enabled = 1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" powerline symbols
+
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty='⚡'
+
 if &t_Co != 256
   set t_Co=256
 endif
@@ -41,3 +59,49 @@ augroup MyFileTypeEvent
   autocmd!
   autocmd FileType vim setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
+
+" define indent command
+function s:Indent()
+  let save_cursor = getcurpos()
+  execute "normal " . "gg=G"
+  call setpos('.', save_cursor)
+endfunction
+command -nargs=0 Indent call s:Indent()
+
+" 補完コマンドの再設定
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : MyInsCompl()
+function! MyInsCompl()
+  let c = nr2char(getchar())
+  if c == "l"
+    return "\<C-x>\<C-l>"
+  elseif c == "n"
+    return "\<C-x>\<C-n>"
+  elseif c == "p"
+    return "\<C-x>\<C-p>"
+  elseif c == "k"
+    return "\<C-x>\<C-k>"
+  elseif c == "t"
+    return "\<C-x>\<C-t>"
+  elseif c == "i"
+    return "\<C-x>\<C-i>"
+  elseif c == "]"
+    return "\<C-x>\<C-]>"
+  elseif c == "f"
+    return "\<C-x>\<C-f>"
+  elseif c == "d"
+    return "\<C-x>\<C-d>"
+  elseif c == "v"
+    return "\<C-x>\<C-v>"
+  elseif c == "u"
+    return "\<C-x>\<C-u>"
+  elseif c == "o"
+    return "\<C-x>\<C-o>"
+  elseif c == "s"
+    return "\<C-x>s"
+  endif
+  return "\<Tab>"
+endfunction
+
+if executable('ctags')
+  set tags=./tags;
+endif
