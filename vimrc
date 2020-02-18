@@ -64,19 +64,9 @@ endif
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
 " ----setting gina.vim
-packadd gina.vim
-if exists(':Gina')
-  nnoremap <Up> :Gina status<CR>
-  nnoremap <Down> :Gina commit<CR>
-  nnoremap <Left> :Gina diff<CR>
-  nnoremap <Right> :QuickRun<CR>
-endif
-noremap! <Up> <Nop>
-noremap! <Down> <Nop>
-noremap! <Left> <Nop>
-noremap! <Right> <Nop>
-
-
+nnoremap <Up> :Gina status<CR>
+nnoremap <Down> :Gina commit<CR>
+nnoremap <Left> :Gina diff<CR>
 
 if executable('ctags')
   set tags=./tags;
